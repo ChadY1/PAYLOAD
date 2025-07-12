@@ -8,7 +8,7 @@ import os
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'  # Changez ceci en production
 
-FERNET_KEY = b'SJ0pY0f3Tiqq5pNXQZsiwS6c1CWrxRocORau8IOj9Ic='
+FERNET_KEY = b'NAHNAHNAH' #CHANGE BY YOUR OWN FERNET KEY
 LOG_PATH = 'log.csv'
 
 USERS = {
