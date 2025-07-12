@@ -1,0 +1,29 @@
+"""
+Scan (ou collez le texte) d’un QR code traçable,
+puis déchiffrez pour afficher les métadonnées.
+"""
+
+from cryptography.fernet import Fernet
+import json
+
+# --- Paramètres ---
+FERNET_KEY = b"SJ0pY0f3Tiqq5pNXQZsiwS6c1CWrxRocORau8IOj9Ic="
+
+# 1) Récupérer le token (décodé du QR).
+#    - Si vous avez zbar / pyzbar : scannez l’image et récupérez le contenu.
+#    - Sinon, copiez-collez la chaîne chiffrée lue dans le QR.
+token = input("Collez le contenu du QR : ").encode()
+
+# 2) Déchiffrement
+f = Fernet(FERNET_KEY)
+try:
+    payload = json.loads(f.decrypt(token).decode())
+except Exception as e:
+    print("Erreur de déchiffrement :", e)
+    exit(1)
+
+# 3) Affichage des métadonnées
+print("\n=== Données QR déchiffrées ===")
+print(f"UID        : {payload['uid']}")
+print(f"Timestamp  : {payload['timestamp']}")
+print(f"Mot de passe (clair) : {payload['pwd']}")
