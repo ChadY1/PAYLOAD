@@ -77,7 +77,7 @@ def export():
     if 'user' not in session:
         return redirect(url_for('login'))
     return send_file(LOG_PATH, as_attachment=True)
-    
+
 if __name__ == "__main__":
     print("🚀 Application Flask démarrée sur http://localhost:5000")
     app.run(debug=True)
